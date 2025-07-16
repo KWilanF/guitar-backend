@@ -13,7 +13,7 @@ services:
 
       # PostgreSQL credentials (from Render DB dashboard)
       - key: DB_NAME
-        value: django-db
+        value: django_db_e2qs
       - key: DB_USER
         value: django_db_e2qs_user
       - key: DB_PASSWORD
