@@ -3,7 +3,30 @@ services:
     name: guitar-backend
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python manage.py migrate && python manage.py runserver 0.0.0.0:$PORT
+    startCommand: gunicorn guitar_backend.wsgi
+    preDeployCommand: |
+      python manage.py migrate
+      python manage.py shell < guitar_backend/create_superuser.py
     envVars:
       - key: DJANGO_SECRET_KEY
         value: your-secret-key
+
+      # PostgreSQL credentials (from Render DB dashboard)
+      - key: DB_NAME
+        value: django-db
+      - key: DB_USER
+        value: django_db_e2qs_user
+      - key: DB_PASSWORD
+        value: PyAon8mMpbvdBtuQgJvjyCJAucQQep2Y
+      - key: DB_HOST
+        value: dpg-d1r18lodl3ps73eua030-a
+      - key: DB_PORT
+        value: 5432
+
+      # Auto superuser creation
+      - key: DJANGO_SUPERUSER_USERNAME
+        value: admin
+      - key: DJANGO_SUPERUSER_EMAIL
+        value: admin@example.com
+      - key: DJANGO_SUPERUSER_PASSWORD
+        value: admin123
