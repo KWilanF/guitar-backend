@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,12 +80,8 @@ WSGI_APPLICATION = 'guitar_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("django-db"),
-        'USER': os.getenv("django_db_e2qs_user"),
-        'PASSWORD': os.getenv("PyAon8mMpbvdBtuQgJvjyCJAucQQep2Y"),
-        'HOST': os.getenv("dpg-d1r18lodl3ps73eua030-a"),
-        'PORT': os.getenv("5432"),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
